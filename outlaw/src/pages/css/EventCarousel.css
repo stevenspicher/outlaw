@@ -1,0 +1,80 @@
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.row {
+    width: 100%;
+}
+/* For devices smaller than 576px: */
+.event-carousel img {
+    width: 100%;
+}
+
+.event-carousel {
+    margin: auto;
+}
+
+/* For devices 576px and above: */
+@media (min-width: 576px) {
+    .event-carousel img {
+        width: 80%;
+    }
+}
+
+/* For devices 768px and above: */
+@media (min-width: 768px) {
+    .event-carousel img {
+        width: 70%;
+    }
+}
+
+/* For devices 992px and above: */
+@media (min-width: 992px) {
+    .event-carousel img {
+        width: 60%;
+    }
+}
+
+/* For devices 1200px and above: */
+@media (min-width: 1200px) {
+    .event-carousel img {
+        width: 50%;
+    }
+}
+
+/*.d-block {*/
+/*    height: 400px;*/
+/*    width: 500px;*/
+/*    object-fit: scale-down; !* This property is used if you want to scale the image within its box *!*/
+/*}*/
+.carousel-border {
+    border: 1px solid black;
+    margin: 0 auto; /* To center the calendar on the page */
+}
+
+.container.carousel-border .row .col .event-carousel .d-block {
+    max-height: 100%;
+    height: 500px;
+    width: 600px;
+    object-fit: fill;
+}
+
+.calendar-container {
+    border: 1px solid #b5b5b5;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f7f7f7;
+}
+
+.calendar-container h1 {
+    color: #555;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.calendar-container button {
+    width: 200px;
+    height: 40px;
+}
