@@ -1,0 +1,21 @@
+.banner {
+    /*background-color: yellow;*/
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Align logo to the left of banner */
+    /*padding: 2px; !* Provide some space around *!*/
+    width: 90%; /* Full width */
+    margin: 0 auto;
+}
+
+.logo {
+    height: 200px; /* Adjust as needed */
+    width: auto; /* Keep logo aspect ratio */
+}
+
+.poster {
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    margin: 10px auto;
+}

@@ -18,10 +18,7 @@ const EventCards = () => {
                                 <Card className="event-card actor-card">
                                     {/*<Card.Img variant="top" src={`${actor}.jpg`} />*/}
                                     <Card.Body>
-                                        <Card.Title>{actor}</Card.Title>
-                                        <Card.Text>
-                                            {actor}'s business card
-                                        </Card.Text>
+                                        <Card.Title>{actor}'s headshot</Card.Title>
                                     </Card.Body>
                                 </Card>
                             </div>

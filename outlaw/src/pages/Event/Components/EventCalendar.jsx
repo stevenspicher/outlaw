@@ -3,6 +3,9 @@ import {Modal, Button, Form} from 'react-bootstrap';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../../css/EventCalendar.css'
+import Stack from "react-bootstrap/Stack";
+import EventDetailModal from '../modals/EventDetailModal.jsx'; // import EventDetailModal here
+import TicketPurchaseModal from '../modals/TicketPurchaseModal'; // import TicketPurchaseModal here
 
 function CalendarComponent() {
     const [date, setDate] = useState(new Date());
@@ -46,6 +49,7 @@ function CalendarComponent() {
                 d.date.getDate() === date.getDate());
         setInfo(index);
         setShow(true);
+
     };
 
     useEffect(() => {
@@ -67,8 +71,12 @@ function CalendarComponent() {
             d.date.getDate() === date.getDate()
         );
     }
-    const handleClose = () => setShow(false);
-    const handleSecondModalClose = () => setSecondModalShow(false); // For second modal
+    const handleClose = () => {
+        setShow(false);
+    }
+    const handleSecondModalClose = () => {
+        setSecondModalShow(false);
+    } // For second modal
     const handleBuyTickets = () => {
         setShow(false);
         setSecondModalShow(true);
@@ -89,20 +97,16 @@ function CalendarComponent() {
     return (
         <div className="container">
             <div className="row">
-                <div className="col">
-                    <div className="calendar-container">
-                        <h1 className="text-center py-3">Cafe Noir Schedule</h1>
+                {/*<div className="col">*/}
+                    {/*<div className="calendar-container">*/}
+                        <div>
+                            <div className={"showinfo"}>
+                        <h1 className="text-center py-3 ">Calendar</h1>
+                        <h3 className="text-center py-3 ">Select a highlighted date to view location, menu, and purchase tickets:</h3>
+
+                            </div>
                         <div className="text-center py-3">
-                            <Button
-                                onClick={() => handleVenueSelection('Gruner Brothers')} className="mx-3">
-                                Gruner Brothers
-                            </Button>
-                            <Button
-                                onClick={() => handleVenueSelection('Three Crowns')} className="mx-3">
-                                Three Crowns
-                            </Button>
-                        </div>
-                        <div className={"calendar-border"}>
+                            <div className={"calendar-border"}>
                             <Calendar
                                 onChange={handleDateChange}
                                 value={date}
@@ -118,10 +122,10 @@ function CalendarComponent() {
                                             d.date.getMonth() === date.getMonth() &&
                                             d.date.getDate() === date.getDate()
                                         );
+// console.log(highlight)
 
-                                        if (highlight) {
-                                            return "red";  // return the color of the venue
-                                        }
+                                            return "yellow";  // return the color of the venue
+
                                     }
                                 }}
                                 tileDisabled={({date, view}) =>
@@ -130,61 +134,35 @@ function CalendarComponent() {
                                 }
                             />
 
-                            <Modal show={show} onHide={handleClose}>
-                                <Modal.Header closeButton>
-                                    <Modal.Title>{date.toLocaleDateString('en-US')}</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>{highlightDates[info].venue}</Modal.Body>
-                                <Modal.Body>Serving {highlightDates[info].menu}</Modal.Body>
-                                <Modal.Body>Cost: {highlightDates[info].cost}</Modal.Body>
-                                <Modal.Footer>
-                                    <Button variant="primary" onClick={handleBuyTickets}>
-                                        Buy Tickets
-                                    </Button>
-                                </Modal.Footer>
-                                {/* Add Second Modal here */}
+                                <EventDetailModal
+                                    show={show}
+                                    onHide={handleClose}
+                                    onBuyTickets={handleBuyTickets}
+                                    date={date}
+                                    venue={highlightDates[info].venue}
+                                    menu={highlightDates[info].menu}
+                                    cost={highlightDates[info].cost}
+                                />
 
-                            </Modal>
-                        </div>
-                        <Modal show={secondModalShow} onHide={handleSecondModalClose}>
-                            <Modal.Header closeButton>
-                                <Modal.Title>Purchase Tickets for {date.toLocaleDateString('en-US')} at {highlightDates[info].venue}</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <Form onSubmit={handleFormSubmit}>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Ticket Holder's Name</Form.Label>
-                                        <Form.Control type="text" value={ticketHolderName}
-                                                      onChange={(e) => setTicketHolderName(e.target.value)} required/>
-                                    </Form.Group>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Number of Tickets</Form.Label>
-                                        <Form.Control type="number" value={numberOfTickets}
-                                                      onChange={(e) => setNumberOfTickets(e.target.value)} required/>
-                                    </Form.Group>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Meal Option</Form.Label>
-                                        <Form.Select value={mealOption} onChange={(e) => setMealOption(e.target.value)}
-                                                     required>
-                                            <option value="">Select a meal option</option>
-                                            <option value="1">Option 1</option>
-                                            <option value="2">Option 2</option>
-                                        </Form.Select>
-                                    </Form.Group>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Special Instructions</Form.Label>
-                                        <Form.Control as="textarea" rows={3} value={specialInstructions}
-                                                      onChange={(e) => setSpecialInstructions(e.target.value)}/>
-                                    </Form.Group>
-                                    <Button variant="primary" type="submit">
-                                        Purchase
-                                    </Button>
-                                </Form>
-                            </Modal.Body>
-                        </Modal>
+                                <TicketPurchaseModal
+                                    show={secondModalShow}
+                                    onHide={handleSecondModalClose}
+                                    onSubmit={handleFormSubmit}
+                                    date={date}
+                                    venue={highlightDates[info].venue}
+                                    ticketHolderName={ticketHolderName}
+                                    setTicketHolderName={setTicketHolderName}
+                                    numberOfTickets={numberOfTickets}
+                                    setNumberOfTickets={setNumberOfTickets}
+                                    mealOption={mealOption}
+                                    setMealOption={setMealOption}
+                                    specialInstructions={specialInstructions}
+                                    setSpecialInstructions={setSpecialInstructions}
+                                />
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

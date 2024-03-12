@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@square/web-sdk": "^2.0.1",
     "firebase": "^10.8.1",
     "firebase-tools": "^13.4.0",
     "react": "^18.2.0",
     "react-calendar": "^4.8.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-square-web-payments-sdk": "^3.2.1",
+    "square": "^35.0.0"
   },
   "devDependencies": {
     "@preact/signals-react": "^2.0.0",
