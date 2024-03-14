@@ -1,4 +1,27 @@
-
+/*!* Extra small devices (phones, less than 768px) *!*/
+/*@media (max-width: 767px) {*/
+/*    .react-calendar {*/
+/*        max-width: 50%;*/
+/*    }*/
+/*}*/
+/*!* Small devices (tablets, between 768px and 992px) *!*/
+/*@media (min-width: 768px) and (max-width: 991px) {*/
+/*    .react-calendar {*/
+/*        max-width: 60%;*/
+/*    }*/
+/*}*/
+/*!* Medium devices (desktops, between 992px and 1200px) *!*/
+/*@media (min-width: 992px) and (max-width: 1199px) {*/
+/*    .react-calendar {*/
+/*        max-width: 70%;*/
+/*    }*/
+/*}*/
+/*!* Large devices (large desktops, 1200px and up) *!*/
+/*@media (min-width: 1200px) {*/
+/*    .react-calendar {*/
+/*        max-width: 100%;*/
+/*    }*/
+/*}*/
 
 .react-calendar {
     width: 100%;

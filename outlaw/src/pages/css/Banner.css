@@ -1,3 +1,58 @@
+/* Extra small devices (phones, less than 768px) */
+@media (max-width: 767px) {
+    .banner .poster .logo {
+        max-width: 90%;
+    }
+    .logo {
+        max-width: 80%;
+        height: 130px
+    }
+    .overlay-text {
+        top: 25%;
+        left: 50%;
+    }
+}
+/* Small devices (tablets, between 768px and 992px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .banner .poster .logo {
+        max-width: 90%;
+    }
+    .logo {
+        height: 150px
+    }
+    .overlay-text {
+        top: 40%;
+        left: 50%;
+    }
+}
+/* Medium devices (desktops, between 992px and 1200px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .banner .poster .logo {
+        max-width: 70%;
+    }
+    .logo {
+        height: 150px
+    }
+    .overlay-text {
+        top: 50%;
+        left: 50%;
+    }
+}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .banner .poster  {
+        max-width: 50%;
+    }
+    .logo {
+        max-width: 60%;
+        height: 170px
+    }
+    .overlay-text {
+        top: 40%;
+        left: 50%;
+    }
+}
+
 .banner {
     /*background-color: yellow;*/
     display: flex;
@@ -9,8 +64,8 @@
 }
 
 .logo {
-    height: 200px; /* Adjust as needed */
-    width: auto; /* Keep logo aspect ratio */
+    /*height: 200px; !* Adjust as needed *!*/
+    width: 90%; /* Keep logo aspect ratio */
 }
 
 .poster {
@@ -34,7 +89,7 @@
 
 .overlay-text {
     position: absolute;
-    top: 50%;
+    /*top: 50%;*/
     left: 50%;
     transform: translate(-50%, -50%);
     color: black;

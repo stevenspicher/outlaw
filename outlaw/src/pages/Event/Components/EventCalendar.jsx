@@ -37,7 +37,7 @@ function CalendarComponent() {
                 "Marry Me Chicken: (grilled chicken in thyme & sundried tomato cream sauce over angel hair pasta),\n" +
                 "\n" +
                 "Cheesecake",
-            cost: "55",
+            cost: "57",
             color: "yellow",
             showOptions: false,
             showCheckout: true
@@ -131,11 +131,14 @@ function CalendarComponent() {
                     <div className={"showinfo"}>
                         {/*<h1 className="text-center py-3 ">Calendar</h1>*/}
                         <h3 className="text-center py-3 ">Select a date to view location, menu, and purchase
-                            tickets. </h3><h5>For more information, email clint@opgart.com. </h5>
+                            tickets: </h3>
+                        <h5>(For more information, email
+                        <a href="mailto:clint@opgart.com"> clint@opgart.com</a>)
+                    </h5>
 
                     </div>
                     <div className="text-center py-3">
-                        <div className={"calendar-border"}>
+                    <div className={"calendar-border"}>
                             <Calendar
                                 onChange={handleDateChange}
                                 value={date}
