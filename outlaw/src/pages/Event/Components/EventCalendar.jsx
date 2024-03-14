@@ -32,32 +32,39 @@ function CalendarComponent() {
             venue: "Gruner Brothers",
             website: "https://grunerbrewing.com/",
             logo: grunerLogo,
-            menu: "Fish Soup",
-            cost: "35",
+            menu: "Spring Salad," +
+                "\n" +
+                "Marry Me Chicken: (grilled chicken in thyme & sundried tomato cream sauce over angel hair pasta),\n" +
+                "\n" +
+                "Cheesecake",
+            cost: "55",
             color: "yellow",
+            showOptions: false,
             showCheckout: true
         },
-        {
-            date: new Date(2024, 3, 16),
-            venue: "The Refinery",
-            website: "https://www.threecrownsgolfclub.com/dining/the-refinery",
-            logo: threeCrownsLogo,
-            menu: "TBD",
-            cost: "TBD",
-            color: "red",
-            showCheckout: false
-        },
-        {
-            date: new Date(2024, 4, 14),
-            venue: "Gruner Brothers",
-            logo: grunerLogo,
-            website: "https://grunerbrewing.com/",
-            menu: "TBD",
-            cost: "TBD",
-            color: "yellow",
-            showCheckout: false
-
-        }
+        // {
+        //     date: new Date(2024, 3, 16),
+        //     venue: "The Refinery",
+        //     website: "https://www.threecrownsgolfclub.com/dining/the-refinery",
+        //     logo: threeCrownsLogo,
+        //     menu: "TBD",
+        //     cost: "TBD",
+        //     color: "red",
+        //     showOptions: false,
+        //     showCheckout: false
+        // },
+        // {
+        //     date: new Date(2024, 4, 14),
+        //     venue: "Gruner Brothers",
+        //     logo: grunerLogo,
+        //     website: "https://grunerbrewing.com/",
+        //     menu: "TBD",
+        //     cost: "TBD",
+        //     color: "yellow",
+        //     showOptions: false,
+        //     showCheckout: false
+        //
+        // }
     ];
 
     const handleDateChange = (date) => {
@@ -124,7 +131,7 @@ function CalendarComponent() {
                     <div className={"showinfo"}>
                         {/*<h1 className="text-center py-3 ">Calendar</h1>*/}
                         <h3 className="text-center py-3 ">Select a date to view location, menu, and purchase
-                            tickets:</h3>
+                            tickets. </h3><h5>For more information, email clint@opgart.com. </h5>
 
                     </div>
                     <div className="text-center py-3">
@@ -174,6 +181,7 @@ function CalendarComponent() {
                                 onSubmit={handleFormSubmit}
                                 date={date}
                                 venue={highlightDates[info].venue}
+                                showOptions={highlightDates[info].showOptions}
                                 ticketHolderNames={ticketHolderNames}
                                 setTicketHolderNames={setTicketHolderNames}
                                 numberOfTickets={numberOfTickets}

@@ -13,6 +13,7 @@ function TicketPurchaseModal({
                                  onSubmit,
                                  date,
                                  venue,
+                                 showOptions,
                                  ticketHolderNames,
                                  setTicketHolderNames,
                                  numberOfTickets,
@@ -106,7 +107,7 @@ function TicketPurchaseModal({
                                 }).format(Number(totalCost))}</h3></Form.Label>
 
                                 {/* Generate the Ticket Holder and Meal Option fields */}
-                                {
+                                { !showOptions ? <></> :
                                     [...Array(parseInt(numberOfTickets))].map((_, i) => (
                                         <React.Fragment key={i}>
                                             <Form.Group className="mb-3">
