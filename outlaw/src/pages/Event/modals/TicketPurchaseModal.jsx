@@ -29,16 +29,12 @@ function TicketPurchaseModal({
     const [showPaymentOptions, setShowPaymentOptions] = useState(false)
     const [showTicketModal, setShowTicketModal] = useState(true)
     const initialOptions = {
-        //sandbox
-        "client-id": "AYLTbBZn9l_je7FC1BZvW77YFQnkqXFziG6Eh8GukCI-LHeDFuTJTCpoijoj02o44brIO9BLcWPs6W-P",
-        //testing
-        // "client-id": "AVHdlUjjl49BqebNpOl_iv3hv2TZMBet1ZufwX2bxSS-0W6tbLnVg83KPSBszOCaGkkyUwqzVeWBoJGL",
+        "client-id": 'AVHdlUjjl49BqebNpOl_iv3hv2TZMBet1ZufwX2bxSS-0W6tbLnVg83KPSBszOCaGkkyUwqzVeWBoJGL',
         currency: "USD",
         intent: "capture",
-        disableFunding: "credit"
+        disableFunding: "credit",
     };
     const handleShow = () => {
-        console.log(totalCost)
         if (totalCost === "0" || totalCost === 0) {
             alert("please select number of tickets and meal options")
         } else {

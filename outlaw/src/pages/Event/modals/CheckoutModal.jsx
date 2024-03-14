@@ -25,7 +25,6 @@ const CheckoutModal = (props) => {
             const venue = props.options.venue;
             const date = props.options.date.toLocaleDateString('en-US');
             details.ticketInfo = props.options
-            console.log(details)
             addTicketGroup(details).then(() => {
                 props.handleClose();
                 props.closeTicketModal();
