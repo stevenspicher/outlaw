@@ -19,3 +19,28 @@
     margin: 0 auto;
     margin: 10px auto;
 }
+
+/* CSS styles for fade in transition */
+
+.poster-before-load {
+    opacity: 0;
+    transition: opacity 5s ease-in-out;
+}
+
+.poster-after-load {
+    opacity: 1;
+    transition: opacity 6s ease-in-out;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 60px;
+    text-align: center;
+}
+
+
+

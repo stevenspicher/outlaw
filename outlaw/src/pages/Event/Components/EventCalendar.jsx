@@ -5,15 +5,24 @@ import 'react-calendar/dist/Calendar.css';
 import '../../css/EventCalendar.css'
 import Stack from "react-bootstrap/Stack";
 import EventDetailModal from '../modals/EventDetailModal.jsx'; // import EventDetailModal here
-import TicketPurchaseModal from '../modals/TicketPurchaseModal'; // import TicketPurchaseModal here
+import TicketPurchaseModal from '../modals/TicketPurchaseModal';
+import grunerLogo from '../../../assets/grunerBrosLogo_small.png';
+import threeCrownsLogo from '../../../assets/refinery.png'
+
 
 function CalendarComponent() {
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
     const [info, setInfo] = useState(0);
     const [secondModalShow, setSecondModalShow] = useState(false); // For second modal
+    const [paymentModalShow, setPaymentModalShow] = useState(false); // For payment modal
     const [selectedVenue, setSelectedVenue] = useState("");
     const [filteredDates, setFilteredDates] = useState([]);
+    const [ticketHolderNames, setTicketHolderNames] = useState('');
+    const [numberOfTickets, setNumberOfTickets] = useState(0);
+    const [mealOptions, setMealOptions] = useState('');
+    const [specialInstructions, setSpecialInstructions] = useState('');
+    const [totalCost, setTotalCost] = useState("0")
 
 
     // Array of dates you want to highlight and make clickable
@@ -21,23 +30,33 @@ function CalendarComponent() {
         {
             date: new Date(2024, 3, 6),
             venue: "Gruner Brothers",
-            menu: "steak and potatoes",
-            cost: "$45.00",
-            color: "yellow"
+            website: "https://grunerbrewing.com/",
+            logo: grunerLogo,
+            menu: "Fish Soup",
+            cost: "35",
+            color: "yellow",
+            showCheckout: true
         },
         {
             date: new Date(2024, 3, 16),
-            venue: "Three Crowns",
-            menu: "chicken and rice",
-            cost: "$35.00",
-            color: "red"
+            venue: "The Refinery",
+            website: "https://www.threecrownsgolfclub.com/dining/the-refinery",
+            logo: threeCrownsLogo,
+            menu: "TBD",
+            cost: "TBD",
+            color: "red",
+            showCheckout: false
         },
         {
             date: new Date(2024, 4, 14),
             venue: "Gruner Brothers",
-            menu: "vodka",
-            cost: "$25.00",
-            color: "yellow"
+            logo: grunerLogo,
+            website: "https://grunerbrewing.com/",
+            menu: "TBD",
+            cost: "TBD",
+            color: "yellow",
+            showCheckout: false
+
         }
     ];
 
@@ -49,6 +68,7 @@ function CalendarComponent() {
                 d.date.getDate() === date.getDate());
         setInfo(index);
         setShow(true);
+        setNumberOfTickets(0)
 
     };
 
@@ -76,16 +96,17 @@ function CalendarComponent() {
     }
     const handleSecondModalClose = () => {
         setSecondModalShow(false);
+        setPaymentModalShow(true)
     } // For second modal
     const handleBuyTickets = () => {
         setShow(false);
         setSecondModalShow(true);
+        setTotalCost(0)
+
     }; // Function to close the first modal and open the second modal when Buy Tickets button is pressed.
 
-    const [ticketHolderName, setTicketHolderName] = useState('');
-    const [numberOfTickets, setNumberOfTickets] = useState(0);
-    const [mealOption, setMealOption] = useState('');
-    const [specialInstructions, setSpecialInstructions] = useState('');
+
+
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
@@ -98,15 +119,16 @@ function CalendarComponent() {
         <div className="container">
             <div className="row">
                 {/*<div className="col">*/}
-                    {/*<div className="calendar-container">*/}
-                        <div>
-                            <div className={"showinfo"}>
-                        <h1 className="text-center py-3 ">Calendar</h1>
-                        <h3 className="text-center py-3 ">Select a highlighted date to view location, menu, and purchase tickets:</h3>
+                {/*<div className="calendar-container">*/}
+                <div>
+                    <div className={"showinfo"}>
+                        {/*<h1 className="text-center py-3 ">Calendar</h1>*/}
+                        <h3 className="text-center py-3 ">Select a date to view location, menu, and purchase
+                            tickets:</h3>
 
-                            </div>
-                        <div className="text-center py-3">
-                            <div className={"calendar-border"}>
+                    </div>
+                    <div className="text-center py-3">
+                        <div className={"calendar-border"}>
                             <Calendar
                                 onChange={handleDateChange}
                                 value={date}
@@ -124,7 +146,7 @@ function CalendarComponent() {
                                         );
 // console.log(highlight)
 
-                                            return "yellow";  // return the color of the venue
+                                        return "yellow";  // return the color of the venue
 
                                     }
                                 }}
@@ -134,35 +156,40 @@ function CalendarComponent() {
                                 }
                             />
 
-                                <EventDetailModal
-                                    show={show}
-                                    onHide={handleClose}
-                                    onBuyTickets={handleBuyTickets}
-                                    date={date}
-                                    venue={highlightDates[info].venue}
-                                    menu={highlightDates[info].menu}
-                                    cost={highlightDates[info].cost}
-                                />
-
-                                <TicketPurchaseModal
-                                    show={secondModalShow}
-                                    onHide={handleSecondModalClose}
-                                    onSubmit={handleFormSubmit}
-                                    date={date}
-                                    venue={highlightDates[info].venue}
-                                    ticketHolderName={ticketHolderName}
-                                    setTicketHolderName={setTicketHolderName}
-                                    numberOfTickets={numberOfTickets}
-                                    setNumberOfTickets={setNumberOfTickets}
-                                    mealOption={mealOption}
-                                    setMealOption={setMealOption}
-                                    specialInstructions={specialInstructions}
-                                    setSpecialInstructions={setSpecialInstructions}
-                                />
+                            <EventDetailModal
+                                show={show}
+                                onHide={handleClose}
+                                onBuyTickets={handleBuyTickets}
+                                date={date}
+                                venue={highlightDates[info].venue}
+                                logo={highlightDates[info].logo}
+                                url={highlightDates[info].website}
+                                menu={highlightDates[info].menu}
+                                cost={highlightDates[info].cost}
+                                showCheckout={highlightDates[info].showCheckout}
+                            />
+                            <TicketPurchaseModal
+                                show={secondModalShow}
+                                onHide={handleSecondModalClose}
+                                onSubmit={handleFormSubmit}
+                                date={date}
+                                venue={highlightDates[info].venue}
+                                ticketHolderNames={ticketHolderNames}
+                                setTicketHolderNames={setTicketHolderNames}
+                                numberOfTickets={numberOfTickets}
+                                setNumberOfTickets={setNumberOfTickets}
+                                mealOptions={mealOptions}
+                                setMealOptions={setMealOptions}
+                                specialInstructions={specialInstructions}
+                                setSpecialInstructions={setSpecialInstructions}
+                                ticketCost={highlightDates[info].cost}
+                                totalCost={totalCost}
+                                setTotalCost={setTotalCost}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     );
 }

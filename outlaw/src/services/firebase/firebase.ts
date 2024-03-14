@@ -19,14 +19,14 @@ const firebaseConfig = {
 };
 
 
-const USE_FIREBASE_EMULATORS = true;
+const USE_FIREBASE_EMULATORS = false;
 
 export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+// export const auth = getAuth(app);
 
-if (USE_FIREBASE_EMULATORS) {
-    connectAuthEmulator(auth, "http://localhost:9099");
-}
+// if (USE_FIREBASE_EMULATORS) {
+//     connectAuthEmulator(auth, "http://localhost:9099");
+// }
 
 export const db = (() => {
     const db = getFirestore();
