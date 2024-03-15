@@ -20,6 +20,7 @@ function TicketPurchaseModal({
                                  setNumberOfTickets,
                                  mealOptions,
                                  setMealOptions,
+                                 optionsList,
                                  specialInstructions,
                                  setSpecialInstructions,
                                  ticketCost,
@@ -43,6 +44,10 @@ function TicketPurchaseModal({
         }
     }
     const handleClose = () => {
+        setNumberOfTickets(0)
+        setTicketHolderNames('')
+        setMealOptions('')
+        setSpecialInstructions('')
         setShowPaymentOptions(false)
         setShowTicketModal(true)
 
@@ -123,8 +128,10 @@ function TicketPurchaseModal({
                                                     setMealOptions(newOptions);
                                                 }}>
                                                     <option disabled value="">Select a meal option</option>
-                                                    <option value="1">Option 1</option>
-                                                    <option value="2">Option 2</option>
+                                                    {/* Prompt: Map through the "options" prop to generate choices below */}
+                                                    {optionsList.map((option, index) => (
+                                                        <option key={index} value={option.value}>{option.label}</option>
+                                                    ))}
                                                 </Form.Select>
                                             </Form.Group>
                                         </React.Fragment>

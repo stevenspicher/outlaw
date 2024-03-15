@@ -35,11 +35,13 @@ function CalendarComponent() {
             menu: "Spring Salad," +
                 "\n" +
                 "Marry Me Chicken: (grilled chicken in thyme & sundried tomato cream sauce over angel hair pasta),\n" +
+                "Gluten-Free option available" +
                 "\n" +
                 "Cheesecake",
             cost: "57",
             color: "yellow",
-            showOptions: false,
+            showOptions: true,
+            optionsList: [{value: 1, label:"Gluten Free"}],
             showCheckout: true
         },
         // {
@@ -191,6 +193,7 @@ function CalendarComponent() {
                                 setNumberOfTickets={setNumberOfTickets}
                                 mealOptions={mealOptions}
                                 setMealOptions={setMealOptions}
+                                optionsList={highlightDates[info].optionsList}
                                 specialInstructions={specialInstructions}
                                 setSpecialInstructions={setSpecialInstructions}
                                 ticketCost={highlightDates[info].cost}

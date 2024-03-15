@@ -26,7 +26,7 @@ const EventCards = () => {
         {name:"Rikki", image: rikki, bio: "wonderful person, needs to turn in a bio"},
         {name:"Steven", image: steven, bio: "Steven Spicher works as a freelance software developer in various coffee shops around Wyoming and Colorado, and spends his free time directing and acting with local theater companies. Past roles include Red (Rothko), A Streetcar Named Desire (Stanley), and The House of Blue Leaves (Artie), and director credits include Rent, Die Fledermaus, Ride the Cyclone, and A Charlie Brown Christmas. Steven hopes you enjoy this show as much as he enjoyed working with the Outlaw group to put it together."},
         {name:"Tanis", image: tanis, bio: "Tanis started performing as a child and has been in numerous Stage III, Outlaw Theatre Productions, and Opera Wyoming. She teaches history at Casper College.  She does all she can to keep up with her crazy kids and her (crazier) husband, Clint."},
-        {name: "Tiana", image: tiana, bio: "wonderful person, needs to turn in a bio"},
+        {name: "Tiana", image: tiana, bio: "Tiana is excited to share the stage with her parents once again, and the rest of her extended theatre family. She will wear many hats in this show and wants to remind you who the real Nightingale Malone is. Hint, it’s not the bald guy. When not working with Outlaw, you can find Tiana galavanting with Opera Wyoming, Theatre of the Poor, and Stage III. When not at a theatre, Tiana can be found at home cuddling her fur babies. She hopes you enjoy the show!"},
     ]
     return (
         <>

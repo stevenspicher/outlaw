@@ -5,7 +5,7 @@ import {addTicketGroup} from "../../../services/firebase/dbFunction";
 import ConfirmationModal from "./ConfirmationModal.jsx";
 
 const CheckoutModal = (props) => {
-
+console.log(props)
 
     const onCreateOrder = (data, actions) => {
         return actions.order.create({
