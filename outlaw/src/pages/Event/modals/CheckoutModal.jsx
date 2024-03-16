@@ -1,11 +1,9 @@
-import React, {useState} from 'react';
-import {PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer} from "@paypal/react-paypal-js";
-import {Form, Modal} from "react-bootstrap";
+import React from 'react';
+import {PayPalButtons} from "@paypal/react-paypal-js";
+import { Modal} from "react-bootstrap";
 import {addTicketGroup} from "../../../services/firebase/dbFunction";
-import ConfirmationModal from "./ConfirmationModal.jsx";
 
 const CheckoutModal = (props) => {
-console.log(props)
 
     const onCreateOrder = (data, actions) => {
         return actions.order.create({

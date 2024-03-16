@@ -32,14 +32,14 @@ function CalendarComponent() {
             venue: "Gruner Brothers",
             website: "https://grunerbrewing.com/",
             logo: grunerLogo,
-            menu: "Spring Salad," +
+            menu: "Spring Salad, " +
                 "\n" +
-                "Marry Me Chicken: (grilled chicken in thyme & sundried tomato cream sauce over angel hair pasta),\n" +
-                "Gluten-Free option available" +
+                "Marry Me Chicken (grilled chicken in thyme & sundried tomato cream sauce over angel hair pasta,\n" +
+                "Gluten-Free option available), " +
                 "\n" +
                 "Cheesecake",
             cost: "57",
-            color: "yellow",
+            color: "blue",
             showOptions: true,
             optionsList: [{value: 1, label:"Gluten Free"}],
             showCheckout: true
@@ -134,13 +134,9 @@ function CalendarComponent() {
                         {/*<h1 className="text-center py-3 ">Calendar</h1>*/}
                         <h3 className="text-center py-3 ">Select a date to view location, menu, and purchase
                             tickets: </h3>
-                        <h5>(For more information, email
-                        <a href="mailto:clint@opgart.com"> clint@opgart.com</a>)
-                    </h5>
-
                     </div>
                     <div className="text-center py-3">
-                    <div className={"calendar-border"}>
+                        <div className={"calendar-border"}>
                             <Calendar
                                 onChange={handleDateChange}
                                 value={date}
@@ -158,7 +154,7 @@ function CalendarComponent() {
                                         );
 // console.log(highlight)
 
-                                        return "yellow";  // return the color of the venue
+                                        return "blue";  // return the color of the venue
 
                                     }
                                 }}
@@ -167,7 +163,9 @@ function CalendarComponent() {
                                     !isHighlightDate(date) // Disable clicking non-highlighted dates
                                 }
                             />
-
+                            <h5>(For more information, email
+                                <a href="mailto:clint@opgart.com"> clint@opgart.com</a>)
+                            </h5>
                             <EventDetailModal
                                 show={show}
                                 onHide={handleClose}

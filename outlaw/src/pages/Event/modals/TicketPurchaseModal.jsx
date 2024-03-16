@@ -93,8 +93,10 @@ function TicketPurchaseModal({
                                     ).format(Number(ticketCost))})
                                 </Form.Label>
                                 <Form.Control type="number" value={numberOfTickets} onChange={(e) => {
-                                    setNumberOfTickets(e.target.value);
-                                    setTotalCost((e.target.value * ticketCost).toString());
+                                    if (e.target.value > 0) {
+                                        setNumberOfTickets(e.target.value);
+                                        setTotalCost((e.target.value * ticketCost).toString());
+                                    }
                                 }} required/>
                             </Form.Group>
                             {totalCost === "0" ? <></> : <>
@@ -112,7 +114,7 @@ function TicketPurchaseModal({
                                     [...Array(parseInt(numberOfTickets))].map((_, i) => (
                                         <React.Fragment key={i}>
                                             <Form.Group className="mb-3">
-                                                <Form.Label>Ticket Holder's Name {i + 1}</Form.Label>
+                                                <Form.Label>Ticket Holder's Name</Form.Label>
                                                 <Form.Control type="text" value={ticketHolderNames[i]}
                                                               onChange={(e) => {
                                                                   let newNames = [...ticketHolderNames];
@@ -121,7 +123,7 @@ function TicketPurchaseModal({
                                                               }} required/>
                                             </Form.Group>
                                             <Form.Group className="mb-3">
-                                                <Form.Label>Meal Option for Ticket Holder {i + 1}</Form.Label>
+                                                <Form.Label>Meal Option for Ticket #{i + 1}</Form.Label>
                                                 <Form.Select defaultValue="" required onChange={(e) => {
                                                     let newOptions = [...mealOptions];
                                                     newOptions[i] = e.target.value;

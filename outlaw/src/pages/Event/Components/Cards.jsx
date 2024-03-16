@@ -47,9 +47,7 @@ const EventCards = () => {
                             </div>
                             <div className="flip-card-back">
                                 <Card className="event-card actor-card">
-                                    {/*<Card.Img variant="top" src={`${actor}.jpg`} />*/}
                                     <Card.Body>
-                                        <Card.Title style={{ fontSize: '14px' }}>{actor.name}</Card.Title>
                                         <p style={{ fontSize: '10px', overflow: 'scroll'}}>
                                              {actor.bio}
                                         </p>
