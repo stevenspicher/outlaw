@@ -7,7 +7,6 @@ import Banner from "./Components/Banner.jsx";
 const Event = () => {
     return (
         <div className={"main_container"}>
-            <h1>Event</h1>
             <Banner/>
             <EventCalendar/>
             <EventCards/>
