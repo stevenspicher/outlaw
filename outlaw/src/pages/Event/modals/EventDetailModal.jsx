@@ -21,7 +21,7 @@ function EventDetailModal({ show, onHide, onBuyTickets, date, venue, logo, url, 
                     <Button variant="primary" onClick={onBuyTickets}>
                         Buy Tickets
                     </Button> :
-                    <p>Tickets available soon!</p>}
+                    <p>Sold out!</p>}
             </Modal.Footer>
         </Modal>
     );

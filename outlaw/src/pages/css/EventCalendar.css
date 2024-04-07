@@ -73,3 +73,9 @@
 .blue {
     background-color: lightblue;
 }
+
+.highlighted-bold {
+    font-weight: bold;
+    background-color: lightblue;
+    padding: 5px; /*to give some space around the text */
+}

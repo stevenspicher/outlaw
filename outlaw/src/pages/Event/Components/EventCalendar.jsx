@@ -8,6 +8,7 @@ import EventDetailModal from '../modals/EventDetailModal.jsx'; // import EventDe
 import TicketPurchaseModal from '../modals/TicketPurchaseModal';
 import grunerLogo from '../../../assets/grunerBrosLogo_small.png';
 import threeCrownsLogo from '../../../assets/refinery.png'
+import invasionLogo from '../../../assets/invasionBar.png'
 
 
 function CalendarComponent() {
@@ -29,7 +30,7 @@ function CalendarComponent() {
     const highlightDates = [
         {
             date: new Date(2024, 3, 6),
-            venue: "Gruner Brothers",
+            venue: "Gruner Brothers Brewing - April 6th",
             website: "https://grunerbrewing.com/",
             logo: grunerLogo,
             menu: "Spring Salad, " +
@@ -40,26 +41,26 @@ function CalendarComponent() {
                 "Cheesecake",
             cost: "57",
             color: "blue",
-            showOptions: true,
+            showOptions: false,
             optionsList: [{value: 1, label:"Gluten Free"}],
+            showCheckout: false
+        },
+        {
+            date: new Date(2024, 3, 26),
+            venue: "The Invasion Bar and Restaurant - Kaycee, WY",
+            website: "https://www.invasionbar.com/",
+            logo: invasionLogo,
+            menu: "Salad, Lasagna, Dessert, Drink",
+            cost: "57",
+            color: "red",
+            showOptions: false,
             showCheckout: true
         },
         // {
-        //     date: new Date(2024, 3, 16),
-        //     venue: "The Refinery",
-        //     website: "https://www.threecrownsgolfclub.com/dining/the-refinery",
-        //     logo: threeCrownsLogo,
-        //     menu: "TBD",
-        //     cost: "TBD",
-        //     color: "red",
-        //     showOptions: false,
-        //     showCheckout: false
-        // },
-        // {
-        //     date: new Date(2024, 4, 14),
-        //     venue: "Gruner Brothers",
-        //     logo: grunerLogo,
-        //     website: "https://grunerbrewing.com/",
+        //     date: new Date(2024, 4, 28),
+        //     venue: "TBD - Thermopolis, WY",
+        //     logo: undefined,
+        //     website: "",
         //     menu: "TBD",
         //     cost: "TBD",
         //     color: "yellow",
@@ -132,12 +133,14 @@ function CalendarComponent() {
                 <div>
                     <div className={"showinfo"}>
                         {/*<h1 className="text-center py-3 ">Calendar</h1>*/}
-                        <h3 className="text-center py-3 ">Select a date to view location, menu, and purchase
-                            tickets: </h3>
+                        {/*<h3 className="text-center py-3 ">Select a date to view location, menu, and purchase*/}
+                        {/*    tickets: </h3>*/}
+                        <h2 className="text-center py-3 ">Next performance April 26th in Kaycee, WY!  </h2>
+                        {/*<h4 className="text-center py-3 ">Keep an eye out for upcoming performances!</h4>*/}
                     </div>
                     <div className="text-center py-3">
                         <div className={"calendar-border"}>
-                            <Calendar
+                        <Calendar
                                 onChange={handleDateChange}
                                 value={date}
                                 minDate={new Date(2024, 3, 1)}
@@ -152,7 +155,6 @@ function CalendarComponent() {
                                             d.date.getMonth() === date.getMonth() &&
                                             d.date.getDate() === date.getDate()
                                         );
-// console.log(highlight)
 
                                         return "blue";  // return the color of the venue
 
@@ -163,6 +165,7 @@ function CalendarComponent() {
                                     !isHighlightDate(date) // Disable clicking non-highlighted dates
                                 }
                             />
+                        <h4 className="text-center py-3 highlighted-bold">Ticket holders do not need to provide tickets - a list will be checked at the door </h4>
                             <h5>(For more information, email
                                 <a href="mailto:clint@opgart.com"> clint@opgart.com</a>)
                             </h5>

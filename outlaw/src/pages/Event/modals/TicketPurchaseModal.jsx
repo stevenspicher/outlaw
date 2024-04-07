@@ -123,7 +123,7 @@ function TicketPurchaseModal({
                                                               }} required/>
                                             </Form.Group>
                                             <Form.Group className="mb-3">
-                                                <Form.Label>Meal Option for Ticket #{i + 1}</Form.Label>
+                                                <Form.Label>Meal Option for Ticket #{i + 1} (select if gluten free, skip if not)</Form.Label>
                                                 <Form.Select defaultValue="" required onChange={(e) => {
                                                     let newOptions = [...mealOptions];
                                                     newOptions[i] = e.target.value;
