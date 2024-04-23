@@ -19,11 +19,13 @@ function CalendarComponent() {
     const [paymentModalShow, setPaymentModalShow] = useState(false); // For payment modal
     const [selectedVenue, setSelectedVenue] = useState("");
     const [filteredDates, setFilteredDates] = useState([]);
-    const [ticketHolderNames, setTicketHolderNames] = useState('');
+    const [ticketHolderNames, setTicketHolderNames] = useState([]);
     const [numberOfTickets, setNumberOfTickets] = useState(0);
     const [mealOptions, setMealOptions] = useState('');
     const [specialInstructions, setSpecialInstructions] = useState('');
+    const [glutenFree, setGlutenFree] = useState(0);
     const [totalCost, setTotalCost] = useState("0")
+    const [ticketObj, setTicketObj] = useState({})
 
 
     // Array of dates you want to highlight and make clickable
@@ -56,18 +58,19 @@ function CalendarComponent() {
             showOptions: false,
             showCheckout: true
         },
-        // {
-        //     date: new Date(2024, 4, 28),
-        //     venue: "TBD - Thermopolis, WY",
-        //     logo: undefined,
-        //     website: "",
-        //     menu: "TBD",
-        //     cost: "TBD",
-        //     color: "yellow",
-        //     showOptions: false,
-        //     showCheckout: false
-        //
-        // }
+        {
+            date: new Date(2024, 4, 18),
+            venue: "Gruner Brothers Brewing - May 18th",
+            logo: grunerLogo,
+            website: "https://grunerbrewing.com/",
+            menu: "Gumbo or Muffaleta, Jambalaya, Beignets",
+            cost: "57",
+            color: "yellow",
+            showOptions: true,
+            optionsList: [],
+            showCheckout: true
+
+        }
     ];
 
     const handleDateChange = (date) => {
@@ -197,9 +200,13 @@ function CalendarComponent() {
                                 optionsList={highlightDates[info].optionsList}
                                 specialInstructions={specialInstructions}
                                 setSpecialInstructions={setSpecialInstructions}
+                                glutenFree={glutenFree}
+                                setGlutenFree={setGlutenFree}
                                 ticketCost={highlightDates[info].cost}
                                 totalCost={totalCost}
                                 setTotalCost={setTotalCost}
+                                ticketObj={ticketObj}
+                                setTicketObj={setTicketObj}
                             />
                         </div>
                     </div>

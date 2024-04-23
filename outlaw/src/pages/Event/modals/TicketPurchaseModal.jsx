@@ -5,6 +5,7 @@ import {
 } from "@paypal/react-paypal-js";
 import CheckoutModal from "./CheckoutModal.jsx";
 import Stack from "react-bootstrap/Stack";
+import '../../css/EventCalendar.css'
 import ConfirmationModal from "./ConfirmationModal.jsx";
 
 function TicketPurchaseModal({
@@ -15,17 +16,16 @@ function TicketPurchaseModal({
                                  venue,
                                  showOptions,
                                  ticketHolderNames,
-                                 setTicketHolderNames,
                                  numberOfTickets,
                                  setNumberOfTickets,
-                                 mealOptions,
-                                 setMealOptions,
                                  optionsList,
                                  specialInstructions,
                                  setSpecialInstructions,
                                  ticketCost,
                                  totalCost,
-                                 setTotalCost
+                                 setTotalCost,
+                                 ticketObj,
+                                 setTicketObj
                              }) {
     const [showPaymentOptions, setShowPaymentOptions] = useState(false)
     const [showTicketModal, setShowTicketModal] = useState(true)
@@ -35,6 +35,8 @@ function TicketPurchaseModal({
         intent: "capture",
         disableFunding: "credit",
     };
+
+ let ticketInfoObj = {};
     const handleShow = () => {
         if (totalCost === "0" || totalCost === 0) {
             alert("please select number of tickets and meal options")
@@ -45,18 +47,11 @@ function TicketPurchaseModal({
     }
     const handleClose = () => {
         setNumberOfTickets(0)
-        setTicketHolderNames('')
-        setMealOptions('')
         setSpecialInstructions('')
+        setTicketObj({})
         setShowPaymentOptions(false)
         setShowTicketModal(true)
 
-    }
-
-    const [showConfirmation, setShowConfirmation] = useState(false)
-
-    const handleConfirmationClose = () => {
-        setShowConfirmation(false);
     }
 
     return (
@@ -68,9 +63,8 @@ function TicketPurchaseModal({
                             date: date,
                             numberOfTickets: numberOfTickets,
                             totalCost: totalCost,
-                            mealOptions: mealOptions,
-                            ticketHolderNames: ticketHolderNames,
-                            specialInstructions: specialInstructions
+                            specialInstructions: specialInstructions,
+                            ticketObj: ticketObj
                         }}/>
                     </PayPalScriptProvider>
                 </> :
@@ -100,10 +94,6 @@ function TicketPurchaseModal({
                                 }} required/>
                             </Form.Group>
                             {totalCost === "0" ? <></> : <>
-                                {/*<Form.Label><h3>Ticket Cost: {new Intl.NumberFormat('en-US', {*/}
-                                {/*    style: 'currency',*/}
-                                {/*    currency: 'USD'*/}
-                                {/*}).format(Number(ticketCost))}</h3></Form.Label>*/}
                                 <Form.Label><h3>Total Cost: {new Intl.NumberFormat('en-US', {
                                     style: 'currency',
                                     currency: 'USD'
@@ -112,31 +102,44 @@ function TicketPurchaseModal({
                                 {/* Generate the Ticket Holder and Meal Option fields */}
                                 { !showOptions ? <></> :
                                     [...Array(parseInt(numberOfTickets))].map((_, i) => (
-                                        <React.Fragment key={i}>
+                                        <div key={i} className="border-class">
+                                        <React.Fragment >
                                             <Form.Group className="mb-3">
-                                                <Form.Label>Ticket Holder's Name</Form.Label>
+                                                <Form.Label>Ticket #{i + 1} - Name</Form.Label>
                                                 <Form.Control type="text" value={ticketHolderNames[i]}
                                                               onChange={(e) => {
-                                                                  let newNames = [...ticketHolderNames];
-                                                                  newNames[i] = e.target.value;
-                                                                  setTicketHolderNames(newNames);
+                                                                  ticketObj[i] = {...ticketObj[i], name : e.target.value};
+                                                                  setTicketObj(ticketObj)
                                                               }} required/>
                                             </Form.Group>
                                             <Form.Group className="mb-3">
-                                                <Form.Label>Meal Option for Ticket #{i + 1} (select if gluten free, skip if not)</Form.Label>
+                                                <Form.Label>Meal Options</Form.Label>
+                                                {optionsList[0] ?
                                                 <Form.Select defaultValue="" required onChange={(e) => {
-                                                    let newOptions = [...mealOptions];
-                                                    newOptions[i] = e.target.value;
-                                                    setMealOptions(newOptions);
+                                                    ticketObj[i] = {...ticketObj[i], options : e.target.value};
+                                                    setTicketObj(ticketObj)
                                                 }}>
                                                     <option disabled value="">Select a meal option</option>
                                                     {/* Prompt: Map through the "options" prop to generate choices below */}
-                                                    {optionsList.map((option, index) => (
+                                                     optionsList.map((option, index) => (
                                                         <option key={index} value={option.value}>{option.label}</option>
-                                                    ))}
-                                                </Form.Select>
+                                                    ))
+                                                </Form.Select>: <></>}
+                                                <Form.Check
+                                                    type="checkbox"
+                                                    id={`custom-checkbox-${i}`}
+                                                    label={`Gluten Free?`}
+                                                    onChange={(e) => {
+                                                        if (e.target.checked) {
+                                                            ticketObj[i] = {...ticketObj[i], gf : e.target.checked};
+                                                            setTicketObj(ticketObj)
+                                                        }
+                                                        // } else {setGlutenFree(glutenFree)}
+                                                    }}
+                                                />
                                             </Form.Group>
                                         </React.Fragment>
+                                        </div>
                                     ))
                                 }
                                 <Form.Group className="mb-3">
@@ -147,16 +150,20 @@ function TicketPurchaseModal({
                             </>
                             }
 
-                            {/*<PayPalScriptProvider options={initialOptions}>*/}
-                            <Button onClick={handleShow}>Checkout</Button>
-                            {/*<CheckoutModal show={showPaymentOptions} handleClose={handleClose} totalCost={totalCost}/>*/}
-                            {/*</PayPalScriptProvider>*/}
-                            <PayPalScriptProvider options={initialOptions}>
-                                <CheckoutModal show={showPaymentOptions} handleClose={handleClose}
-                                               totalCost={totalCost}/>
-                            </PayPalScriptProvider>
-                            {/*<ConfirmationModal show={showConfirmation} onHide={handleConfirmationClose}/>*/}
+                            <Button onClick={
+                                handleShow
+                            }>Checkout</Button>
 
+                            <PayPalScriptProvider options={initialOptions}>
+                                <CheckoutModal show={showPaymentOptions} handleClose={handleClose} totalCost={totalCost} closeTicketModal={onHide} options={{
+                                    venue: venue,
+                                    date: date,
+                                    numberOfTickets: numberOfTickets,
+                                    totalCost: totalCost,
+                                    specialInstructions: specialInstructions,
+                                    ticketObj: ticketObj
+                                }}/>
+                            </PayPalScriptProvider>
                         </Form>
                     </Modal.Body>
                 </Modal>}

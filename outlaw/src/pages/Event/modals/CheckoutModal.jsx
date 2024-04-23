@@ -1,6 +1,6 @@
 import React from 'react';
 import {PayPalButtons} from "@paypal/react-paypal-js";
-import { Modal} from "react-bootstrap";
+import {Modal} from "react-bootstrap";
 import {addTicketGroup} from "../../../services/firebase/dbFunction";
 
 const CheckoutModal = (props) => {
@@ -21,12 +21,11 @@ const CheckoutModal = (props) => {
         return actions.order.capture().then((details) => {
             const name = details.payer.name.given_name;
             const venue = props.options.venue;
-            const date = props.options.date.toLocaleDateString('en-US');
             details.ticketInfo = props.options
             addTicketGroup(details).then(() => {
                 props.handleClose();
                 props.closeTicketModal();
-                alert(name + ", thank you for your purchase! We will see you at " + venue + "on " + date)})
+                alert(name + ", thank you for your purchase! We will see you at " + venue + ". No need to provide a ticket - Ticket holder names will be checked at the door.")})
             ;
         });
     }
