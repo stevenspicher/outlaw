@@ -23,6 +23,15 @@ let grunerTotalTicketCost = Object.values(ticketsData).reduce((total, group) => 
     return total + (group.ticketInfo.venue === "Gruner Brothers" ? Number(group.ticketInfo.totalCost) : 0);
 }, 0);
 
+let gruner2TotalTicketsSold = Object.values(ticketsData).reduce((total, group) => {
+        return total + (group.ticketInfo.venue === "Gruner Brothers Brewing - May 18th" ? Number(group.ticketInfo.numberOfTickets) : 0);
+    }, 0);
+
+// Calculate the total cost of all tickets sold
+    let gruner2TotalTicketCost = Object.values(ticketsData).reduce((total, group) => {
+        return total + (group.ticketInfo.venue === "Gruner Brothers Brewing - May 18th" ? Number(group.ticketInfo.totalCost) : 0);
+    }, 0);
+
     let kayceeTotalTicketsSold = Object.values(ticketsData).reduce((total, group) => {
         return total + (group.ticketInfo.venue === "The Invasion Bar and Restaurant - Kaycee, WY" ? Number(group.ticketInfo.numberOfTickets) : 0);
     }, 0);
@@ -31,6 +40,7 @@ let grunerTotalTicketCost = Object.values(ticketsData).reduce((total, group) => 
     let kayceeTotalTicketCost = Object.values(ticketsData).reduce((total, group) => {
         return total + (group.ticketInfo.venue === "The Invasion Bar and Restaurant - Kaycee, WY" ? Number(group.ticketInfo.totalCost) : 0);
     }, 0);
+
 
 
     const exportToExcel = () => {
@@ -165,6 +175,52 @@ useEffect(() => {
                                     )})}
                         </Accordion.Body>
                     </Accordion.Item>
+                </Card>
+            </Accordion>
+                    <Accordion defaultActiveKey="0">
+                        <Card>
+                            <Accordion.Item>
+                                <Accordion.Header>
+                                    <Card.Title>Gruner Brothers Brewing - May 18th</Card.Title>
+                                </Accordion.Header>
+                                <Accordion.Body>
+                                    <Button variant="primary" onClick={exportToExcel}>Export</Button>
+                                    <Card.Body>
+                                        <Card.Footer className="text-muted">Total Tickets Sold: {gruner2TotalTicketsSold} Total Sales: ${gruner2TotalTicketCost}</Card.Footer>
+                                    </Card.Body>
+                                    {Object.entries(ticketsData).map((group, index) => {
+                                        console.log(group[1].ticketInfo.venue)
+                                        if (group[1].ticketInfo.venue === "Gruner Brothers Brewing - May 18th")
+                                            return (
+                                                <Card key={`accord-${index}`} style={{width: '400px'}}>
+                                                    <Card.Title>Card Holder: {group[1].payer.name.given_name} {group[1].payer.name.surname} </Card.Title>
+                                                    <Card.Title>Number of Tickets: {group[1].ticketInfo.numberOfTickets}</Card.Title>
+                                                    <Card.Title>Total Cost: {group[1].ticketInfo.totalCost}</Card.Title>
+                                                    <Card.Body>
+                                                        {/*<Card.Title>Guests:</Card.Title>*/}
+                                                        {/*<Card.Title> {Object.entries(group[1].ticketInfo.ticketHolderNames).map((name, guestIndex) =>*/}
+                                                        {/*{ return (*/}
+
+                                                        {/*    <p key={guestIndex}>{guestIndex +1}: {name[1]}</p>*/}
+                                                        {/*)*/}
+                                                        {/*})}</Card.Title>*/}
+                                                        {/*<Card.Title>{(() => {*/}
+                                                        {/*    const glutenFreeCount = Object.values(group[1].ticketInfo.mealOptions)*/}
+                                                        {/*        .filter(mealOption => mealOption).length;*/}
+                                                        {/*    if (glutenFreeCount > 0) {*/}
+                                                        {/*        return (*/}
+                                                        {/*            <>*/}
+                                                        {/*                Gluten free: {glutenFreeCount}*/}
+                                                        {/*            </>*/}
+                                                        {/*        )*/}
+                                                        {/*    }*/}
+                                                        {/*})()}</Card.Title>*/}
+                                                    </Card.Body>
+
+                                                </Card>
+                                            )})}
+                                </Accordion.Body>
+                            </Accordion.Item>
                 </Card>
             </Accordion>
         </div>
